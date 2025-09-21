@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // Video mute/unmute toggle with persistence
   var video = document.querySelector('.hero-video');
-  // prefer the mobile topbar toggle if present, fallback to hero toggle
-  var vToggle = document.querySelector('.mobile-topbar #videoToggle') || document.getElementById('videoToggle') || document.getElementById('videoToggleHero');
+  // collect all toggles so mobile and hero controls stay in sync
+  var vToggles = Array.prototype.slice.call(document.querySelectorAll('.video-toggle'));
   try{
     var stored = localStorage.getItem('coaster_video_muted');
     if(stored !== null && video){
@@ -41,35 +41,40 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }catch(e){/* ignore storage errors */}
 
-  function updateButton(){
-    if(!vToggle || !video) return;
+  function updateAllToggles(){
+    if(!video) return;
     var muted = !!video.muted;
-    vToggle.setAttribute('aria-pressed', String(muted));
-    vToggle.setAttribute('aria-label', muted ? 'Unmute background video' : 'Mute background video');
-    vToggle.textContent = muted ? '🔇' : '🔊';
+    vToggles.forEach(function(btn){
+      try{
+        btn.setAttribute('aria-pressed', String(muted));
+        btn.setAttribute('aria-label', muted ? 'Unmute background video' : 'Mute background video');
+        btn.textContent = muted ? '🔇' : '🔊';
+      }catch(e){}
+    });
   }
 
-  if(vToggle){
-  // debug: indicate handler attached
-  try{ if(localStorage && localStorage.getItem('coaster_debug') === '1') console.log('DEBUG: vToggle handler attached to', vToggle); }catch(e){}
-  vToggle.addEventListener('click', function(e){
-      // debug helper: if enabled, log the element under the click point
+  // attach click handlers to every toggle button
+  vToggles.forEach(function(btn){
+    try{ if(localStorage && localStorage.getItem('coaster_debug') === '1') console.log('DEBUG: attaching vToggle to', btn); }catch(e){}
+    btn.addEventListener('click', function(e){
       try{
         if(localStorage && localStorage.getItem('coaster_debug') === '1'){
           var elAt = document.elementFromPoint(e.clientX, e.clientY);
-      console.log('DEBUG: click on vToggle at', e.clientX, e.clientY, 'elementFromPoint =>', elAt, 'computedStyle:', elAt && window.getComputedStyle ? window.getComputedStyle(elAt) : null);
+          console.log('DEBUG: click on vToggle at', e.clientX, e.clientY, 'elementFromPoint =>', elAt, 'computedStyle:', elAt && window.getComputedStyle ? window.getComputedStyle(elAt) : null);
         }
       }catch(err){}
       if(!video) return;
       video.muted = !video.muted;
       try{ localStorage.setItem('coaster_video_muted', String(video.muted)); }catch(e){}
-  updateButton();
-  // animation: briefly add class then remove
-  vToggle.classList.add('toggled');
-  setTimeout(function(){ vToggle.classList.remove('toggled'); }, 260);
+      updateAllToggles();
+      // animation: briefly add class then remove
+      btn.classList.add('toggled');
+      setTimeout(function(){ btn.classList.remove('toggled'); }, 260);
     });
-  }
-  updateButton();
+  });
+
+  // initialize toggles from stored state
+  updateAllToggles();
 });
 
 // Staggered entrance for stats when scrolled into view (respects reduced motion)
