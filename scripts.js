@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // Video mute/unmute toggle with persistence
   var video = document.querySelector('.hero-video');
+  var vLoader = document.querySelector('.video-loader');
   // collect all toggles so mobile and hero controls stay in sync
   var vToggles = Array.prototype.slice.call(document.querySelectorAll('.video-toggle'));
   try{
@@ -71,6 +72,18 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // initialize toggles from stored state
   updateAllToggles();
+
+  // Video loader handling: hide when video can play, or fallback after timeout
+  (function(){
+    if(!vLoader || !video) return;
+    var hide = function(){ if(!vLoader.classList.contains('hidden')) vLoader.classList.add('hidden'); };
+    var onCan = function(){ try{ hide(); video.removeEventListener('canplay', onCan); }catch(e){} };
+    video.addEventListener('canplay', onCan);
+    // also listen for loadeddata as an earlier signal
+    video.addEventListener('loadeddata', onCan);
+    // fallback: hide after 6s to avoid stuck loader
+    setTimeout(hide, 6000);
+  })();
 });
 
 // Staggered entrance for stats when scrolled into view (respects reduced motion)
