@@ -53,24 +53,20 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
-  // attach click handlers to every toggle button
-  vToggles.forEach(function(btn){
-    try{ if(localStorage && localStorage.getItem('coaster_debug') === '1') console.log('DEBUG: attaching vToggle to', btn); }catch(e){}
-    btn.addEventListener('click', function(e){
-      try{
-        if(localStorage && localStorage.getItem('coaster_debug') === '1'){
-          var elAt = document.elementFromPoint(e.clientX, e.clientY);
-          console.log('DEBUG: click on vToggle at', e.clientX, e.clientY, 'elementFromPoint =>', elAt, 'computedStyle:', elAt && window.getComputedStyle ? window.getComputedStyle(elAt) : null);
-        }
-      }catch(err){}
-      if(!video) return;
-      video.muted = !video.muted;
-      try{ localStorage.setItem('coaster_video_muted', String(video.muted)); }catch(e){}
-      updateAllToggles();
-      // animation: briefly add class then remove
-      btn.classList.add('toggled');
-      setTimeout(function(){ btn.classList.remove('toggled'); }, 260);
-    });
+  // Delegate clicks for .video-toggle to ensure handler always runs
+  document.addEventListener('click', function(e){
+    var btn = e.target && e.target.closest ? e.target.closest('.video-toggle') : null;
+    if(!btn) return;
+    try{ if(localStorage && localStorage.getItem('coaster_debug') === '1') console.log('DEBUG: delegated click on vToggle', btn); }catch(e){}
+    // prevent default and stop immediate handling
+    e.preventDefault();
+    if(!video) return;
+    video.muted = !video.muted;
+    try{ localStorage.setItem('coaster_video_muted', String(video.muted)); }catch(e){}
+    updateAllToggles();
+    // animation: briefly add class then remove on the clicked button
+    btn.classList.add('toggled');
+    setTimeout(function(){ btn.classList.remove('toggled'); }, 260);
   });
 
   // initialize toggles from stored state
