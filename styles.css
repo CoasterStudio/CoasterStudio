@@ -99,26 +99,18 @@ main, .hero, .site-header, .site-footer{width:100%}
 .footer-center{flex:1;text-align:center;color:rgba(255,255,255,0.7);font-size:13px}
 .footer-center a{color:rgba(255,255,255,0.9);text-decoration:underline}
 .footer-right{display:flex;align-items:center;gap:10px}
-.social{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.04);color:var(--muted);text-decoration:none;font-weight:700;font-size:13px;padding:0 6px}
-.social:hover{background:rgba(255,255,255,0.06)}
+.social{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:transparent;border-radius:6px;padding:0;margin:0;line-height:0}
+.social:hover{background:transparent}
 
-.social svg{display:block;width:18px;height:18px}
-.social-yt svg{width:20px;height:14px}
-.social-x svg{width:16px;height:16px}
-
-.social img{display:block;width:20px;height:auto}
-.social img[alt="YouTube"]{height:14px}
-.social img[alt="X"]{height:16px}
-.social img[alt="Instagram"]{height:16px}
-.social img[alt="TikTok"]{height:16px}
-.social img[alt="Roblox"]{height:16px}
+.social img{display:block;width:60%;height:60%;object-fit:contain}
+.social:focus{outline:2px solid rgba(255,255,255,0.12);outline-offset:2px}
 
 /* brand accents for social buttons (subtle) */
-.social-yt{background:linear-gradient(180deg, rgba(255,0,0,0.12), rgba(255,0,0,0.06))}
-.social-x{background:linear-gradient(180deg, rgba(29,155,240,0.08), rgba(29,155,240,0.04))}
-.social-ig{background:linear-gradient(180deg, rgba(225,48,108,0.08), rgba(225,48,108,0.04))}
-.social-tt{background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.04))}
-.social-rb{background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))}
+.social-yt:hover{background:linear-gradient(180deg, rgba(255,0,0,0.12), rgba(255,0,0,0.06))}
+.social-x:hover{background:linear-gradient(180deg, rgba(29,155,240,0.08), rgba(29,155,240,0.04))}
+.social-ig:hover{background:linear-gradient(180deg, rgba(225,48,108,0.08), rgba(225,48,108,0.04))}
+.social-tt:hover{background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.04))}
+.social-rb:hover{background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))}
 
 @media (max-width:900px){
   .site-footer .footer-inner{flex-direction:column;align-items:center;gap:12px;text-align:center}
