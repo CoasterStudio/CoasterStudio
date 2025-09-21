@@ -16,7 +16,22 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .main-nav a{color:rgba(255,255,255,0.9);text-decoration:none;font-weight:600;font-size:14px}
 .nav-toggle{display:none;background:transparent;border:2px solid rgba(255,255,255,0.06);color:var(--muted);padding:8px 12px;border-radius:8px}
 
-.video-toggle{position:absolute;top:18px;right:20px;z-index:999;background:rgba(0,0,0,0.5);color:#fff;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:10px;font-size:16px;backdrop-filter:blur(4px);cursor:pointer;pointer-events:auto}
+/* Mobile topbar */
+.mobile-topbar{display:none;position:fixed;left:0;right:0;top:0;z-index:200;background:linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.45));padding:10px 0}
+.mobile-inner{display:flex;align-items:center;justify-content:space-between}
+.mobile-logo{height:36px}
+.mobile-actions{display:flex;gap:10px;align-items:center}
+.mobile-actions .video-toggle{position:static;z-index:100;background:rgba(0,0,0,0.45);backdrop-filter:none}
+
+/* Mobile nav panel */
+.mobile-nav{display:none;background:linear-gradient(180deg, rgba(0,0,0,0.95), rgba(0,0,0,0.9));position:fixed;left:0;right:0;top:56px;z-index:190;padding:12px 20px;border-top:1px solid rgba(255,255,255,0.03)}
+.mobile-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.mobile-nav a{color:rgba(255,255,255,0.9);text-decoration:none;padding:8px 10px;border-radius:8px;display:inline-block}
+.mobile-nav.open{display:block;animation:navDrop 260ms cubic-bezier(.2,.9,.3,1) both}
+@keyframes navDrop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+
+.video-toggle{position:absolute;top:18px;right:20px;z-index:300;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.35));color:#fff;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:10px;font-size:16px;backdrop-filter:none;cursor:pointer;pointer-events:auto}
 .video-toggle:hover{background:rgba(0,0,0,0.65)}
 .video-toggle[aria-pressed="false"]{background:var(--accent);color:#111}
 
@@ -27,7 +42,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .hero{position:relative;min-height:84vh;display:flex;align-items:flex-end;overflow:hidden}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transform:scale(1.02)}
 .hero-bg{display:none}
-.overlay{position:absolute;inset:0;background:linear-gradient(90deg, rgba(3,3,3,0.8) 0%, rgba(3,3,3,0.45) 50%, rgba(3,3,3,0.9) 100%);z-index:1}
+.overlay{position:absolute;inset:0;background:linear-gradient(90deg, rgba(3,3,3,0.8) 0%, rgba(3,3,3,0.45) 50%, rgba(3,3,3,0.9) 100%);z-index:1;pointer-events:none}
 .hero-content{position:relative;padding:90px 20px 40px;display:flex;align-items:center;gap:40px;z-index:2}
 .hero-content{position:relative;padding:90px 20px 40px;display:flex;align-items:center;gap:40px}
 .hero-left{flex:1;max-width:720px}
@@ -35,7 +50,9 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .lead{color:rgba(255,255,255,0.85);line-height:1.6;font-size:18px;margin:0 0 26px}
 .hero-cta{display:flex;gap:14px}
 .btn{display:inline-block;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px}
-.btn.primary{background:var(--accent);color:#111}
+.btn.primary{background:linear-gradient(135deg,#8a2be2,#6a0dad);color:#fff;box-shadow:0 6px 18px rgba(106,13,173,0.18)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(106,13,173,0.26)}
+.btn.primary:focus{outline:3px solid rgba(106,13,173,0.18);outline-offset:3px}
 .btn.ghost{background:rgba(255,255,255,0.06);color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
 
 .hero-right{width:360px;display:flex;align-items:flex-end;justify-content:center}
@@ -43,9 +60,22 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 .stats-bar{position:relative;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,0.03)}
 .stats-inner{display:flex;align-items:center;gap:24px;padding:18px 20px}
-.stat{display:flex;flex-direction:column;align-items:center;flex:1;text-align:center;padding:10px 0}
-.stat strong{font-size:22px;color:#fff}
-.stat span{font-size:13px;color:rgba(255,255,255,0.75)}
+.stat{display:flex;flex-direction:column;align-items:center;flex:1;text-align:center;padding:10px 0;transition:transform 280ms cubic-bezier(.2,.9,.3,1),box-shadow 280ms ease,background-color 280ms;will-change:transform;cursor:default}
+.stat strong{font-size:22px;color:#fff;transition:color 220ms ease,text-shadow 220ms ease}
+.stat span{font-size:13px;color:rgba(255,255,255,0.75);transition:color 220ms ease}
+
+/* interactive hover effect */
+.stat:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 18px 40px rgba(0,0,0,0.48);cursor:pointer}
+.stat:active{transform:translateY(-4px) scale(0.995)}
+.stat:hover strong{color:#ffffff;text-shadow:0 6px 22px rgba(106,13,173,0.12)}
+.stat:hover span{color:rgba(255,255,255,0.95)}
+.stat::after{content:"";display:block;width:40px;height:4px;background:linear-gradient(90deg,#8a2be2,#6a0dad);border-radius:4px;margin-top:10px;opacity:0;transform:translateY(6px);transition:opacity 260ms ease, transform 260ms ease}
+.stat:hover::after{opacity:1;transform:translateY(0)}
+
+/* Staggered entrance: initial hidden state */
+.stats-inner{overflow:visible}
+.stat{opacity:0;transform:translateY(18px) scale(0.995)}
+.stat.visible{opacity:1;transform:translateY(0) scale(1);transition:transform 520ms cubic-bezier(.16,.84,.3,1),opacity 420ms ease}
 .divider{width:1px;height:44px;background:rgba(255,255,255,0.04)}
 .brand{height:24px}
 
@@ -55,6 +85,11 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   .hero-right{display:none}
   .nav-toggle{display:inline-block}
   .main-nav{display:none}
+  .mobile-topbar{display:block}
+  /* hide original top-right toggle in hero when using mobile topbar */
+  .hero .video-toggle{display:none}
+  /* hide desktop header on mobile so topbar receives clicks and is visible */
+  .site-header{display:none}
 }
 
 @media (max-width:520px){

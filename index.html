@@ -19,17 +19,36 @@
 						<li><a href="#about">About</a></li>
 					</ul>
 				</nav>
-				<button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+				<!-- nav toggle moved to mobile topbar -->
 			</div>
 		</header>
 
+		<!-- Mobile topbar visible only on small screens -->
+		<div class="mobile-topbar" aria-hidden="false">
+			<div class="container mobile-inner">
+				<img src="CircleLogo.png" alt="logo" class="mobile-logo">
+				<div class="mobile-actions">
+					<button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+					<button id="videoToggle" class="video-toggle" aria-pressed="true" aria-label="Unmute background video">🔇</button>
+				</div>
+			</div>
+			<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+				<ul>
+					<li><a href="#services">Services</a></li>
+					<li><a href="#works">Our Works</a></li>
+					<li><a href="#case">Case Studies</a></li>
+					<li><a href="#about">About</a></li>
+				</ul>
+			</nav>
+		</div>
+
 		<section class="hero">
-			<video class="hero-video" autoplay muted loop playsinline poster="index-hero-large.jpg" aria-hidden="true">
-				<source src="MEDIA/DarkoasterClip.mp4" type="video/mp4">
+			<video class="hero-video" autoplay muted loop playsinline poster="" aria-hidden="true">
+				<source src="MEDIA\DarkoasterClip.mp4" type="video/mp4">
 				<!-- Fallback for older browsers -->
 				Your browser does not support the video tag.
 			</video>
-			<button id="videoToggle" class="video-toggle" aria-pressed="true" aria-label="Unmute background video">🔇</button>
+			<button id="videoToggleHero" class="video-toggle" aria-pressed="true" aria-label="Unmute background video">🔇</button>
 			<div class="overlay"></div>
 			<div class="container hero-content">
 				<div class="hero-left">
@@ -41,7 +60,7 @@
 					</div>
 				</div>
 				<div class="hero-right">
-					<img src="index-hero.png" alt="game preview" class="hero-image" onerror="this.style.display='none'">
+					<img src="" alt="game preview" class="hero-image" onerror="this.style.display='none'">
 				</div>
 			</div>
 			<div class="stats-bar">
