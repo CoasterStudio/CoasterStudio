@@ -9,6 +9,11 @@
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--muted);background:#000}
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
+
+/* Make page a column so footer can sit at the bottom when content is short */
+body{display:flex;flex-direction:column;min-height:100vh}
+main, .hero, .site-header, .site-footer{width:100%}
+.site-footer{margin-top:auto}
 .site-header{position:fixed;left:0;right:0;top:0;z-index:50;padding:18px 0}
 .header-inner{display:flex;align-items:center;justify-content:space-between}
 .logo{height:44px}
@@ -78,6 +83,50 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .stat.visible{opacity:1;transform:translateY(0) scale(1);transition:transform 520ms cubic-bezier(.16,.84,.3,1),opacity 420ms ease}
 .divider{width:1px;height:44px;background:rgba(255,255,255,0.04)}
 .brand{height:24px}
+
+/* Footer */
+.site-footer{position:relative;overflow:hidden;background:linear-gradient(180deg, rgba(15,15,15,0.98), rgba(12,12,12,0.98));border-top:1px solid rgba(255,255,255,0.03);padding:26px 0;color:rgba(255,255,255,0.85)}
+
+/* subtle repeating logo pattern behind footer content */
+.site-footer::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:url('MEDIA/CoasterStudiosLogo.png');background-repeat:repeat;background-size:96px 96px;background-position:0 0;opacity:0.045;z-index:0;mix-blend-mode:overlay}
+.site-footer::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:url('MEDIA/CoasterStudiosLogo.png');background-repeat:repeat;background-size:96px 96px;background-position:48px 48px;opacity:0.03;z-index:0;mix-blend-mode:overlay}
+.site-footer .footer-inner{position:relative;z-index:1}
+.site-footer .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.footer-left{display:flex;align-items:center;gap:18px}
+.footer-logo{height:34px}
+.footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;align-items:center}
+.footer-nav a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:14px}
+.footer-center{flex:1;text-align:center;color:rgba(255,255,255,0.7);font-size:13px}
+.footer-center a{color:rgba(255,255,255,0.9);text-decoration:underline}
+.footer-right{display:flex;align-items:center;gap:10px}
+.social{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.04);color:var(--muted);text-decoration:none;font-weight:700;font-size:13px;padding:0 6px}
+.social:hover{background:rgba(255,255,255,0.06)}
+
+.social svg{display:block;width:18px;height:18px}
+.social-yt svg{width:20px;height:14px}
+.social-x svg{width:16px;height:16px}
+
+.social img{display:block;width:20px;height:auto}
+.social img[alt="YouTube"]{height:14px}
+.social img[alt="X"]{height:16px}
+.social img[alt="Instagram"]{height:16px}
+.social img[alt="TikTok"]{height:16px}
+.social img[alt="Roblox"]{height:16px}
+
+/* brand accents for social buttons (subtle) */
+.social-yt{background:linear-gradient(180deg, rgba(255,0,0,0.12), rgba(255,0,0,0.06))}
+.social-x{background:linear-gradient(180deg, rgba(29,155,240,0.08), rgba(29,155,240,0.04))}
+.social-ig{background:linear-gradient(180deg, rgba(225,48,108,0.08), rgba(225,48,108,0.04))}
+.social-tt{background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.04))}
+.social-rb{background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))}
+
+@media (max-width:900px){
+  .site-footer .footer-inner{flex-direction:column;align-items:center;gap:12px;text-align:center}
+  .footer-left{order:1}
+  .footer-center{order:2}
+  .footer-right{order:3}
+  .footer-nav ul{flex-wrap:wrap;justify-content:center}
+}
 
 /* Responsive */
 @media (max-width:900px){
