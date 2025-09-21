@@ -1,9 +1,59 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-    <link rel="shortcut icon" type="image/png" href="WebsiteIcon.png">
-</head>
-<body>
-</body>
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Game — Coaster Studio</title>
+		<link rel="icon" href="favicon.ico">
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="container header-inner">
+				<img src="CircleLogo.png" alt="logo" class="logo">
+				<nav class="main-nav" id="mainNav">
+					<ul>
+						<li><a href="#services">Services</a></li>
+						<li><a href="#works">Our Works</a></li>
+						<li><a href="#case">Case Studies</a></li>
+						<li><a href="#about">About</a></li>
+					</ul>
+				</nav>
+				<button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+			</div>
+		</header>
+
+		<section class="hero">
+			<video class="hero-video" autoplay muted loop playsinline poster="index-hero-large.jpg" aria-hidden="true">
+				<source src="MEDIA/DarkoasterClip.mp4" type="video/mp4">
+				<!-- Fallback for older browsers -->
+				Your browser does not support the video tag.
+			</video>
+			<div class="overlay"></div>
+			<div class="container hero-content">
+				<div class="hero-left">
+					<h1>COASTER STUDIO</h1>
+					<p class="lead">We specialize in developing innovative and engaging coaster-themed gaming experiences, combining creativity, technology, and entertainment to deliver high-quality products that captivate and inspire players.</p>
+					<div class="hero-cta">
+						<a class="btn primary" href="#contact">CONTACT US</a>
+						<a class="btn ghost" href="#works">OUR WORKS</a>
+					</div>
+				</div>
+				<div class="hero-right">
+					<img src="index-hero.png" alt="game preview" class="hero-image" onerror="this.style.display='none'">
+				</div>
+			</div>
+			<div class="stats-bar">
+				<div class="container stats-inner">
+					<div class="stat"><strong>5.5M+</strong><span>VISITS</span></div>
+					<div class="divider"></div>
+					<div class="stat"><strong>20K+</strong><span>MEMBERS</span></div>
+					<div class="divider"></div>
+					<div class="stat"><strong>20K+</strong><span>DAC</span></div>
+                </div>
+			</div>
+		</section>
+
+		<script src="scripts.js"></script>
+	</body>
 </html>
