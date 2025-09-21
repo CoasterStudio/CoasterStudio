@@ -83,6 +83,22 @@ document.addEventListener('DOMContentLoaded', function(){
     video.addEventListener('loadeddata', onCan);
     // fallback: hide after 6s to avoid stuck loader
     setTimeout(hide, 6000);
+    // video error handling: show a small message and attempt one reload
+    var vErrorEl = document.createElement('div');
+    vErrorEl.className = 'video-error';
+    vErrorEl.textContent = 'Background video failed to load. Click to retry.';
+    vErrorEl.tabIndex = 0;
+    vErrorEl.addEventListener('click', function(){ try{ video.load(); video.play(); vErrorEl.classList.remove('show'); }catch(e){} });
+    document.body.appendChild(vErrorEl);
+    var triedReload = false;
+    video.addEventListener('error', function(){
+      try{ vErrorEl.classList.add('show'); }catch(e){}
+      // attempt one automated reload after 1s
+      if(!triedReload){
+        triedReload = true;
+        setTimeout(function(){ try{ video.load(); video.play(); }catch(e){} }, 1000);
+      }
+    });
   })();
 });
 
