@@ -157,6 +157,32 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
 .value-card h3{margin:0;font-size:18px;color:#fff;position:relative;z-index:2}
 .value-card p{margin:0;color:rgba(255,255,255,0.9);font-size:14px;position:relative;z-index:2}
 
+/* Hover / focus effects for values */
+.value-card{transition:transform 520ms cubic-bezier(.16,.84,.3,1), box-shadow 520ms ease;}
+.value-img{transition:transform 640ms cubic-bezier(.2,.9,.3,1), filter 520ms ease;transform-origin:center center}
+.value-card::after{transition:background 520ms ease, opacity 520ms ease}
+.value-card h3, .value-card p{transition:transform 520ms ease, opacity 520ms ease}
+
+.value-card:hover, .value-card:focus-within{transform:translateY(-4px) scale(1.01);box-shadow:0 10px 24px rgba(0,0,0,0.38), 0 0 48px rgba(138,43,226,0.14);}
+.value-card:hover .value-img, .value-card:focus-within .value-img{transform:scale(1.03) translateZ(0)}
+.value-card:hover::after, .value-card:focus-within::after{background:radial-gradient(600px 200px at 10% 10%, rgba(138,43,226,0.10), transparent 18%), linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.44));}
+.value-card:hover h3, .value-card:focus-within h3{transform:translateY(-2px);opacity:1}
+.value-card:hover p, .value-card:focus-within p{transform:translateY(-1px);opacity:0.98}
+
+/* subtle accent border on hover */
+.value-card:hover{border-color:rgba(138,43,226,0.28)}
+
+/* reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce){
+  .value-card,.value-img,.value-card::after,.value-card h3,.value-card p{transition:none!important;transform:none!important}
+}
+
+/* disable heavy hover on small screens to avoid layout shifts */
+@media (max-width:600px){
+  .value-card{transform:none;box-shadow:none}
+  .value-img{transform:none}
+}
+
 @media (max-width:1000px){
   .values-grid{grid-template-columns:repeat(2,1fr)}
 }
@@ -201,8 +227,9 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
 .news { padding: 48px 0; background: transparent; }
 .news-inner { max-width:1100px; margin:0 auto; }
 .news-header { margin-bottom:16px; }
-.news-list { list-style:none; padding:0; margin:0; display:grid; gap:12px; }
-.news-item { background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); padding:12px; border-radius:8px; }
+.news-list, .news-list li { list-style: none; padding: 0; margin: 0; }
+.news-list { display:grid; gap:12px; }
+.news-item { background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); padding:12px 14px; border-radius:8px; display:block; overflow:hidden }
 .news-toggle { display:block; width:100%; text-align:left; font-weight:600; background:none; border:none; color:inherit; padding:0; cursor:pointer; }
 .news-toggle:focus { outline:3px solid rgba(128,90,255,0.18); border-radius:6px; }
 .news-body { margin-top:8px; color:var(--muted); }
