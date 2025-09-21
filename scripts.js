@@ -116,3 +116,40 @@ document.addEventListener('DOMContentLoaded', function(){
     reveal();
   }
 })();
+
+    // News expand/collapse behavior
+    (function(){
+      var newsToggles = document.querySelectorAll('.news-toggle');
+      if(newsToggles && newsToggles.length){
+        newsToggles.forEach(function(btn){
+          btn.addEventListener('click', function(){
+            var expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            var body = this.nextElementSibling;
+            if(!body) return;
+            if(expanded){
+              body.hidden = true;
+            } else {
+              body.hidden = false;
+            }
+          });
+        });
+
+        // Optional: simple rotator for headlines (non-intrusive)
+        try{
+          var rotatorIndex = 0;
+          var headlineButtons = Array.from(newsToggles);
+          if(headlineButtons.length > 1){
+            setInterval(function(){
+              var prev = headlineButtons[rotatorIndex % headlineButtons.length];
+              prev.setAttribute('aria-expanded','false');
+              var prevBody = prev.nextElementSibling; if(prevBody) prevBody.hidden = true;
+              rotatorIndex++;
+              var next = headlineButtons[rotatorIndex % headlineButtons.length];
+              next.setAttribute('aria-expanded','true');
+              var nextBody = next.nextElementSibling; if(nextBody) nextBody.hidden = false;
+            }, 8000);
+          }
+        }catch(e){console.warn('news rotator error', e)}
+      }
+    })();
