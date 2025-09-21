@@ -75,14 +75,14 @@ main, .hero, .site-header, .site-footer{width:100%}
 .hero-right{width:360px;display:flex;align-items:flex-end;justify-content:center}
 .hero-image{max-width:100%;height:auto;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,0.6)}
 
-.stats-bar{position:relative;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,0.03)}
-.stats-inner{display:flex;align-items:center;gap:24px;padding:18px 20px}
-.stat{display:flex;flex-direction:column;align-items:center;flex:1;text-align:center;padding:10px 0;transition:transform 280ms cubic-bezier(.2,.9,.3,1),box-shadow 280ms ease,background-color 280ms;will-change:transform;cursor:default}
-.stat strong{font-size:22px;color:#fff;transition:color 220ms ease,text-shadow 220ms ease}
-.stat span{font-size:13px;color:rgba(255,255,255,0.75);transition:color 220ms ease}
+.stats-bar{position:absolute;right:24px;bottom:24px;background:rgba(0,0,0,0.62);backdrop-filter:blur(8px);padding:10px 14px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,0.55);z-index:40;max-width:480px;border:1px solid rgba(255,255,255,0.04)}
+.stats-inner{display:flex;align-items:center;gap:18px;padding:0}
+.stat{display:flex;flex-direction:column;align-items:center;flex:initial;text-align:center;padding:8px 12px;transition:transform 280ms cubic-bezier(.2,.9,.3,1),box-shadow 280ms ease,background-color 280ms;will-change:transform;cursor:default}
+.stat strong{font-size:20px;color:#fff;line-height:1;transition:color 220ms ease,text-shadow 220ms ease}
+.stat span{font-size:12px;color:rgba(255,255,255,0.78);transition:color 220ms ease}
 
 /* interactive hover effect */
-.stat:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 18px 40px rgba(0,0,0,0.48);cursor:pointer}
+.stat:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 18px 40px rgba(0,0,0,0.48);cursor:pointer}
 .stat:active{transform:translateY(-4px) scale(0.995)}
 .stat:hover strong{color:#ffffff;text-shadow:0 6px 22px rgba(106,13,173,0.12)}
 .stat:hover span{color:rgba(255,255,255,0.95)}
@@ -136,6 +136,12 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
   .footer-center{order:2}
   .footer-right{order:3}
   .footer-nav ul{flex-wrap:wrap;justify-content:center}
+}
+
+/* Responsive: revert stats to full-width bar on smaller screens */
+@media (max-width:900px){
+  .stats-bar{position:relative;right:auto;bottom:auto;margin-top:18px;padding:14px 18px;border-radius:10px;width:100%;max-width:none}
+  .stats-inner{justify-content:space-between}
 }
 
 /* Responsive */
