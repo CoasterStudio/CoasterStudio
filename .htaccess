@@ -1,1 +1,1 @@
-RewriteRule ^favicon.ico sites/%{SERVER_NAME}/FavIcon.png [NC,L]
+RewriteRule ^favicon.ico sites/%{SERVER_NAME}/favicon.ico [NC,L]
