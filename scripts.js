@@ -35,10 +35,21 @@ document.addEventListener('DOMContentLoaded', function(){
   var vLoader = document.querySelector('.video-loader');
   // collect all toggles so mobile and hero controls stay in sync
   var vToggles = Array.prototype.slice.call(document.querySelectorAll('.video-toggle'));
+  // Autoplay policies block unmuted autoplay in many browsers.
+  // Start the video muted to allow autoplay, but remember the user's preference.
+  var desiredUnmute = false;
   try{
     var stored = localStorage.getItem('coaster_video_muted');
-    if(stored !== null && video){
-      video.muted = stored === 'true';
+    if(video){
+      // Default to muted so autoplay is allowed
+      video.muted = true;
+      if(stored === 'true'){
+        // user previously chose muted: keep muted
+        video.muted = true;
+      } else if(stored === 'false'){
+        // user previously chose unmuted: don't unmute automatically (requires gesture)
+        desiredUnmute = true;
+      }
     }
   }catch(e){/* ignore storage errors */}
 
@@ -72,6 +83,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // initialize toggles from stored state
   updateAllToggles();
+
+  // Try to start playback (will succeed if autoplay is allowed while muted)
+  try{ if(video && video.play) video.play().catch(function(){/* autoplay blocked - waiting for user gesture */}); }catch(e){}
 
   // Video loader handling: hide when video can play, or fallback after timeout
   (function(){
