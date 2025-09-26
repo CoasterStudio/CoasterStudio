@@ -1,0 +1,16 @@
+{
+  "name": "coasterstudio-site",
+  "version": "1.0.0",
+  "description": "Static site with Netlify functions for Rolimons scraping",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev",
+    "test-rolimons": "node ./scripts/test-rolimons.js"
+  },
+  "devDependencies": {
+    "netlify-cli": "^23.7.3"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.9"
+  }
+}

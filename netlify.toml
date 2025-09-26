@@ -1,0 +1,15 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[dev]
+  functions = "netlify/functions"
+  port = 8888
+
+[context.production.environment]
+  NODE_ENV = "production"
+  # any environment variables you need for production can go here
+
+[[redirects]]
+  # Redirects for Netlify build are not needed for local functions.
+  # Removed the /.netlify redirect to avoid Netlify Dev parsing errors.

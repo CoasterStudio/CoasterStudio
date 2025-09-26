@@ -67,9 +67,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // Delegate clicks for .video-toggle to ensure handler always runs
   document.addEventListener('click', function(e){
-    var btn = e.target && e.target.closest ? e.target.closest('.video-toggle') : null;
-    if(!btn) return;
-    try{ if(localStorage && localStorage.getItem('coaster_debug') === '1') console.log('DEBUG: delegated click on vToggle', btn); }catch(e){}
+  var btn = e.target && e.target.closest ? e.target.closest('.video-toggle') : null;
+  if(!btn) return;
     // prevent default and stop immediate handling
     e.preventDefault();
     if(!video) return;
@@ -145,6 +144,68 @@ document.addEventListener('DOMContentLoaded', function(){
     // fallback
     reveal();
   }
+})();
+
+// Featured page: populate stats using Rolimons only (no Roblox API calls)
+(function(){
+  if(!document.querySelector) return;
+  var cards = Array.from(document.querySelectorAll('.game-card[data-universe-id]'));
+  if(!cards.length) return;
+
+  function fmt(n){ if(n==null) return '—'; return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+  async function fetchJson(url, opts){
+    var controller = new AbortController();
+    var id = setTimeout(function(){ controller.abort(); }, 8000);
+    try{
+      var res = await fetch(url, Object.assign({}, opts || {}, { signal: controller.signal }));
+      clearTimeout(id);
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      return await res.json();
+    }catch(err){ clearTimeout(id); throw err; }
+  }
+
+  function updateCard(universeId, data){
+    var card = document.querySelector('.game-card[data-universe-id="' + universeId + '"]');
+    if(!card) return;
+    var liveEl = card.querySelector('.players-live');
+    var totalEl = card.querySelector('.players-total');
+    var favEl = card.querySelector('.players-favorites');
+    if(liveEl) liveEl.textContent = data.players != null ? fmt(data.players) : (data.playing != null ? fmt(data.playing) : '—');
+    if(totalEl) totalEl.textContent = data.visits != null ? fmt(data.visits) : (data.totalVisits != null ? fmt(data.totalVisits) : '—');
+    if(favEl) favEl.textContent = data.favorites != null ? fmt(data.favorites) : (data.favorited != null ? fmt(data.favorited) : '—');
+  }
+
+  async function tryRolimonsProxy(universeId){
+    try{
+      var url = '/.netlify/functions/rolimons-proxy?universeId=' + encodeURIComponent(universeId);
+      var json = await fetchJson(url);
+      if(json && (json.players != null || json.visits != null || json.favorites != null)){
+        return json;
+      }
+    }catch(e){/* ignore */}
+    return null;
+  }
+
+  (async function(){
+    var universeIds = cards.map(function(c){ return c.getAttribute('data-universe-id'); }).filter(Boolean);
+    // loading state
+    cards.forEach(function(card){ var liveEl = card.querySelector('.players-live'); if(liveEl) liveEl.textContent = 'Loading...'; var totalEl = card.querySelector('.players-total'); if(totalEl) totalEl.textContent = 'Loading...'; var favEl = card.querySelector('.players-favorites'); if(favEl) favEl.textContent = 'Loading...'; });
+
+    var any = false;
+    for(var i=0;i<universeIds.length;i++){
+      var id = universeIds[i];
+      try{
+        var data = await tryRolimonsProxy(id);
+        if(data){ updateCard(id, data); any = true; }
+      }catch(e){ /* ignore per-id errors */ }
+    }
+    if(!any){
+      // nothing available, show placeholders
+      cards.forEach(function(card){ var liveEl = card.querySelector('.players-live'); if(liveEl) liveEl.textContent = '—'; var totalEl = card.querySelector('.players-total'); if(totalEl) totalEl.textContent = '—'; var favEl = card.querySelector('.players-favorites'); if(favEl) favEl.textContent = '—'; });
+    }
+  })();
+
 })();
 
     // News expand/collapse behavior

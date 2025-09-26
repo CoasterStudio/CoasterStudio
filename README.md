@@ -1,3 +1,3 @@
-## Coaster Studio
+# Coaster Studio
 
-© 2025 Coaster Studio Holdings, All Rights Reserved.
+© 2025 Coaster Studio Holdings, All Rights Reserved

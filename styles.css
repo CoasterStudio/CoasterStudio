@@ -238,3 +238,53 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
   .about-inner { flex-direction:column; text-align:center; }
   .about-media { margin-bottom:12px; }
 }
+
+/* Featured page styles */
+.featured-hero{padding:42px 0}
+.featured-hero h1{font-size:34px;margin:0 0 6px}
+.featured-hero .muted{color:var(--muted)}
+.featured-list{padding:28px 0}
+.game-card{display:flex;gap:18px;align-items:flex-start;background:rgba(255,255,255,0.02);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin-bottom:14px}
+.game-thumb{flex:0 0 140px;overflow:hidden;border-radius:8px;background:#111;display:flex;align-items:center;justify-content:center}
+/* make thumbnail a square; use aspect-ratio for modern browsers and fallback fixed height */
+.game-thumb{width:140px;aspect-ratio:1/1;height:auto}
+.game-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.game-body{flex:1}
+.game-title{margin:0 0 6px}
+.game-meta{display:flex;gap:12px;align-items:center;margin-top:10px}
+.game-meta .players, .game-meta .max-players{font-size:14px;color:var(--muted)}
+.game-meta .btn{margin-left:auto}
+
+/* Stat badges inside game-meta */
+.game-meta .players, .game-meta .total-visits, .game-meta .favorites {
+  background: rgba(255,255,255,0.03);
+  padding:8px 12px;
+  border-radius:8px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:rgba(255,255,255,0.92);
+  font-weight:700;
+  font-size:13px;
+  min-width:90px;
+}
+
+.game-meta .players strong, .game-meta .total-visits strong, .game-meta .favorites strong{
+  font-weight:800;
+  color:#fff;
+  display:inline-block;
+  min-width:40px;
+  text-align:right;
+}
+
+@media (max-width:700px){
+  .game-meta{flex-wrap:wrap;gap:8px}
+  .game-meta .btn{width:100%;order:99}
+}
+
+@media (max-width:700px){
+  .game-card{flex-direction:column;align-items:center}
+  .game-thumb{width:100%;height:160px;aspect-ratio:unset}
+  .game-meta{width:100%;justify-content:space-between}
+  .game-meta .btn{margin-left:0}
+}
