@@ -4,11 +4,14 @@
   "description": "Static site with Netlify functions for Rolimons scraping",
   "main": "index.js",
   "scripts": {
-    "start": "netlify dev",
-    "test-rolimons": "node ./scripts/test-rolimons.js"
+    "start": "serve -s . -l 5000",
+    "test-rolimons": "node ./scripts/test-rolimons.js",
+    "deploy": "gh-pages -d ."
   },
   "devDependencies": {
-    "netlify-cli": "^23.7.3"
+    "netlify-cli": "^23.7.3",
+    "serve": "^14.1.2",
+    "gh-pages": "^5.0.0"
   },
   "dependencies": {
     "node-fetch": "^2.6.9"
