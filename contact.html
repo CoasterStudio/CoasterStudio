@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Us — Coaster Studio</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <img src="CircleLogo.png" alt="logo" class="logo">
+        <nav class="main-nav" id="mainNav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="featured.html">Featured</a></li>
+            <li><a href="https://coasterstudio.store" target="_blank" rel="noopener noreferrer">Store</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="index.html#about">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="contact-page" style="padding-top:88px;">
+      <section class="contact-hero">
+        <div class="container">
+          <h1>Contact Us</h1>
+          <p class="muted">Get in touch with the Coaster Studio team. We'd love to hear from you!</p>
+        </div>
+      </section>
+
+      <section class="contact-content">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="contact-info">
+              <h2>Get in Touch</h2>
+              <p>Whether you have questions about our games, want to collaborate, or need support, we're here to help.</p>
+              
+              <div class="contact-methods">
+                <div class="contact-method">
+                  <h3>Business Inquiries</h3>
+                  <p>For partnerships, collaborations, and business opportunities.</p>
+                  <a href="mailto:business@coasterstudio.com" class="contact-link">business@coasterstudio.com</a>
+                </div>
+                
+                <div class="contact-method">
+                  <h3>Support</h3>
+                  <p>Need help with our games or technical issues?</p>
+                  <a href="mailto:support@coasterstudio.com" class="contact-link">support@coasterstudio.com</a>
+                </div>
+                
+                <div class="contact-method">
+                  <h3>Community</h3>
+                  <p>Join our community on Discord for real-time chat and updates.</p>
+                  <a href="https://discord.com/invite/2YYypwSRta" class="contact-link" target="_blank" rel="noopener noreferrer">Join Discord</a>
+                </div>
+              </div>
+
+              <div class="social-links">
+                <h3>Follow Us</h3>
+                <div class="social-grid">
+                  <a href="https://www.youtube.com/@CoasterStudio" class="social social-yt" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Youtube.png" alt="YouTube"></a>
+                  <a href="https://x.com/CoasterOperator" class="social social-x" aria-label="X" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Twitter.png" alt="X"></a>
+                  <a href="https://www.instagram.com/coasterstudio" class="social social-ig" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Instagram.png" alt="Instagram"></a>
+                  <a href="https://www.tiktok.com/@coasterstudio" class="social social-tt" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Tiktok.png" alt="TikTok"></a>
+                  <a href="https://www.roblox.com/communities/34173405/Coaster-Studio" class="social social-rb" aria-label="Roblox" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Roblox.png" alt="Roblox"></a>
+                  <a href="https://discord.com/invite/2YYypwSRta" class="social social-discord" aria-label="Discord" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Discord.png" alt="Discord"></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-form-container">
+              <h2>Send us a Message</h2>
+              <form class="contact-form" id="contactForm" action="#" method="POST">
+                <div class="form-group">
+                  <label for="name">Name *</label>
+                  <input type="text" id="name" name="name" required aria-required="true">
+                  <span class="error-message" id="nameError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" required aria-required="true">
+                  <span class="error-message" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="subject">Subject *</label>
+                  <select id="subject" name="subject" required aria-required="true">
+                    <option value="">Select a subject</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="business">Business Partnership</option>
+                    <option value="support">Technical Support</option>
+                    <option value="feedback">Game Feedback</option>
+                    <option value="media">Media/Press</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <span class="error-message" id="subjectError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="message">Message *</label>
+                  <textarea id="message" name="message" rows="6" required aria-required="true" placeholder="Tell us about your inquiry..."></textarea>
+                  <span class="error-message" id="messageError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <span class="checkmark"></span>
+                    Subscribe to our newsletter for updates and announcements
+                  </label>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn primary" id="submitBtn">
+                    <span class="btn-text">Send Message</span>
+                    <span class="btn-loading" style="display: none;">Sending...</span>
+                  </button>
+                </div>
+
+                <div class="form-status" id="formStatus" style="display: none;"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-left">
+          <img src="CircleLogo.png" alt="Coaster Studio" class="footer-logo">
+          <nav class="footer-nav" aria-label="Footer">
+            <ul>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="https://coasterstudio.store" target="_blank" rel="noopener noreferrer">Store</a></li>
+              <li><a href="#careers">Careers</a></li>
+              <li><a href="#news">News</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="footer-center">
+          <p>© 2025 Coaster Studio. All Rights Reserved. &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a> &nbsp;•&nbsp; <a href="privacy.html">Privacy Policy</a></p>
+        </div>
+        <div class="footer-right">
+          <a href="https://www.youtube.com/@CoasterStudio" class="social social-yt" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Youtube.png" alt="YouTube"></a>
+          <a href="https://x.com/CoasterOperator" class="social social-x" aria-label="X" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Twitter.png" alt="X"></a>
+          <a href="https://www.instagram.com/coasterstudio" class="social social-ig" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Instagram.png" alt="Instagram"></a>
+          <a href="https://www.tiktok.com/@coasterstudio" class="social social-tt" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Tiktok.png" alt="TikTok"></a>
+          <a href="https://www.roblox.com/communities/34173405/Coaster-Studio" class="social social-rb" aria-label="Roblox" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Roblox.png" alt="Roblox"></a>
+          <a href="https://discord.com/invite/2YYypwSRta" class="social social-discord" aria-label="Discord" target="_blank" rel="noopener noreferrer"><img src="MEDIA/social/Discord.png" alt="Discord"></a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="contact.js"></script>
+  </body>
+</html>
