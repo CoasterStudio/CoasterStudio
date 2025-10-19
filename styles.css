@@ -1,5 +1,5 @@
 :root{
-  --bg-color:#0b0b0b;
+  --bg-color:#0f0f0f;
   --accent:#f6a623; /* orange */
   --muted:rgba(255,255,255,0.85);
   --glass:rgba(0,0,0,0.45);
@@ -7,7 +7,7 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--muted);background:#000}
+html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--muted);background:var(--bg-color)}
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
 
 /* Make page a column so footer can sit at the bottom when content is short */
@@ -97,16 +97,57 @@ main, .hero, .site-header, .site-footer{width:100%}
 .brand{height:24px}
 
 /* Footer */
-.site-footer{position:relative;overflow:visible;background:linear-gradient(180deg, rgba(15,15,15,0.98), rgba(12,12,12,0.98));border-top:1px solid rgba(255,255,255,0.03);padding:26px 0;color:rgba(255,255,255,0.85);padding-bottom:calc(26px + env(safe-area-inset-bottom, 48px));z-index:999}
+.site-footer{
+  position:relative;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(15,15,15,0.98), rgba(12,12,12,0.98));
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding: 26px 0;
+  color: rgba(255,255,255,0.85);
+  z-index: 999;
+  min-height: 80px;
+  margin-top: 40px;
+}
 
 /* subtle repeating logo pattern behind footer content */
-.site-footer::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:url('MEDIA/CoasterStudiosLogo.png');background-repeat:repeat;background-size:96px 96px;background-position:0 0;opacity:0.045;z-index:0;mix-blend-mode:overlay}
-.site-footer::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:url('MEDIA/CoasterStudiosLogo.png');background-repeat:repeat;background-size:96px 96px;background-position:48px 48px;opacity:0.03;z-index:0;mix-blend-mode:overlay}
-.site-footer .footer-inner{position:relative;z-index:1000}
-.site-footer .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.site-footer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:url('MEDIA/CoasterStudiosLogo.png');
+  background-repeat:repeat;
+  background-size:96px 96px;
+  background-position:0 0;
+  opacity:0.045;
+  z-index:0;
+  mix-blend-mode:overlay;
+}
+.site-footer::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:url('MEDIA/CoasterStudiosLogo.png');
+  background-repeat:repeat;
+  background-size:96px 96px;
+  background-position:48px 48px;
+  opacity:0.03;
+  z-index:0;
+  mix-blend-mode:overlay;
+}
+.site-footer .footer-inner{
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
 
-/* ensure body has a small bottom padding as a fallback so footer isn't clipped by OS UI */
-body{padding-bottom:env(safe-area-inset-bottom,48px)}
+/* ensure body has proper spacing */
+body{padding-bottom:20px}
 
 /* optional spacer if further bottom room is needed */
 .bottom-spacer{height:48px}
@@ -131,11 +172,24 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
 .social-rb:hover{background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))}
 
 @media (max-width:900px){
-  .site-footer .footer-inner{flex-direction:column;align-items:center;gap:12px;text-align:center}
+  .site-footer{
+    padding: 20px 0;
+    min-height: auto;
+  }
+  .site-footer .footer-inner{
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    text-align:center;
+  }
   .footer-left{order:1}
   .footer-center{order:2}
   .footer-right{order:3}
-  .footer-nav ul{flex-wrap:wrap;justify-content:center}
+  .footer-nav ul{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+  }
 }
 
 /* Responsive: revert stats to full-width bar on smaller screens */
@@ -293,6 +347,7 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
 .contact-page {
   background: var(--bg-color);
   min-height: 100vh;
+  margin-bottom: 40px;
 }
 
 .contact-hero {
@@ -370,6 +425,10 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
   color: #fff;
 }
 
+.social-links {
+  margin-bottom: 60px;
+}
+
 .social-links h3 {
   font-size: 1.2rem;
   font-weight: 600;
@@ -381,6 +440,7 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-bottom: 40px;
 }
 
 .social-grid .social {
@@ -410,6 +470,8 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 16px;
   padding: 32px;
+  position: relative;
+  z-index: 1;
 }
 
 .form-group {
@@ -435,6 +497,30 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
   color: #fff;
   font-size: 1rem;
   transition: all 0.2s ease;
+}
+
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.form-group select option {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 8px 12px;
+}
+
+.form-group select option:disabled {
+  color: rgba(255,255,255,0.4);
+  font-style: italic;
+}
+
+.form-group select:invalid {
+  color: rgba(255,255,255,0.4);
 }
 
 .form-group input:focus,
@@ -515,12 +601,15 @@ body{padding-bottom:env(safe-area-inset-bottom,48px)}
 
 .form-actions {
   margin-top: 32px;
+  position: relative;
+  z-index: 2;
 }
 
 .form-actions .btn {
   width: 100%;
   justify-content: center;
   position: relative;
+  z-index: 3;
 }
 
 .btn.loading {

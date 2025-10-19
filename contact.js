@@ -144,7 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // For now, we'll simulate a successful submission
         return new Promise((resolve) => {
             setTimeout(() => {
-                console.log('Form submission data:', Object.fromEntries(formData));
+                // In production, this would be sent to your backend
+                // console.log('Form submission data:', Object.fromEntries(formData));
                 resolve({ success: true, message: 'Message sent successfully!' });
             }, 2000);
         });
